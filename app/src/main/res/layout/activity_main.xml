@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context=".activities.MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginVertical="@dimen/dp_20"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/slogan_image"
+        android:src="@drawable/img_sot_slogan" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:background="@color/LightGrey"
+        android:paddingVertical="@dimen/dp_15"
+        android:text="@string/serum_of_truth_database"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/sp_23" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@color/White"
+        android:paddingHorizontal="@dimen/dp_20">
+
+        <LinearLayout
+            android:id="@+id/main_act_container_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <EditText
+                android:paddingHorizontal="@dimen/dp_15"
+                android:textSize="@dimen/sp_20"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginVertical="@dimen/dp_20"
+                android:layout_weight="8"
+                android:autofillHints=""
+                android:background="@drawable/black_bordered_rectangle"
+                android:inputType="text"
+                tools:ignore="LabelFor" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginVertical="@dimen/dp_20"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/icon_sot_search"
+                android:src="@drawable/ic_sot_database_search" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginHorizontal="@dimen/dp_40"
+            android:textSize="@dimen/sp_20"
+            android:id="@+id/tv_language"
+            android:background="@drawable/black_bordered_rectangle"
+            android:height="@dimen/dp_50"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_act_container_search"
+            android:text="@string/all_languages"
+            android:textColor="@color/Black" />
+
+        
+
+    </RelativeLayout>
+
+</LinearLayout>

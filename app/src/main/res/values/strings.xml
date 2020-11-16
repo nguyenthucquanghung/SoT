@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SoT</string>
+    <string name="slogan_image">Slogan Image</string>
+    <string name="serum_of_truth_database">Serum of Truth Database</string>
+    <string name="icon_sot_search">Icon SoT search</string>
+    <string name="all_languages">All languages</string>
+</resources>
