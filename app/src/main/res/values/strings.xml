@@ -7,4 +7,10 @@
     <string name="thumbnail">Thumbnail</string>
     <string name="title">Title</string>
     <string name="url">Url: </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sot_search">SoT SEARCH</string>
+    <string name="sot_select">SoT SELECT</string>
+    <string name="back_to_my_page">BACK TO MY PAGE</string>
+    <string name="no_related_news_found">No related news found!</string>
 </resources>

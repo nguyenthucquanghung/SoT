@@ -2,10 +2,8 @@ package vnd.macro.sot.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation
 import android.view.KeyEvent
 import android.view.View
-import android.widget.ListView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +17,7 @@ import vnd.macro.sot.viewmodel.ListViewModel
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: ListViewModel
-    private val refLinkAdapter = RefLinkAdapter(arrayListOf())
+    private val refLinkAdapter = RefLinkAdapter(arrayListOf(), this)
     private val langList = listOf("All languages", "English")
     private var currentLangPos = 0
 
@@ -38,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        et_news.setOnKeyListener { v, keyCode, event ->
+        et_news.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 searchEventDetected()
                 return@setOnKeyListener true
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     private fun searchEventDetected() {
         this.hideKeyboard()
         if (et_news.text.toString().isEmpty()) {
-            Toast.makeText(this, "Please enter some incredulous news", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please enter some incredulous news!", Toast.LENGTH_SHORT).show()
         } else {
             val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
             et_news.isCursorVisible = false

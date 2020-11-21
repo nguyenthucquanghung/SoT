@@ -42,16 +42,14 @@ class ListViewModel: ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<SearchResponse>() {
                     override fun onSuccess(t: SearchResponse) {
-                        Log.d("hehehe ", t.toString())
                         refLinks.value = t.referenceLinks
-                        serverError.value = false
+                        serverError.value = t.referenceLinks.isNullOrEmpty()
                         loading.value = false
                     }
 
                     override fun onError(e: Throwable) {
                         serverError.value = true
                         loading.value = false
-                        Log.d("hehehe ", e.printStackTrace().toString())
                     }
 
                 })

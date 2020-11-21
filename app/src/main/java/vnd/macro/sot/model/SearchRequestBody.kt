@@ -6,5 +6,5 @@ data class SearchRequestBody (
     @SerializedName("lengthParam")
     val lengthParam: Int,
     @SerializedName("sotSearch")
-    val sotSearch: String
+    val sotSearch: String?
 )

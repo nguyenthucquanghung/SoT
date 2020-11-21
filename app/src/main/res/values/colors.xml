@@ -9,7 +9,7 @@
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>
-    <color name="Yellow">#FFFF00</color>
+    <color name="Yellow">#ffff00</color>
     <color name="Snow">#FFFAFA</color>
     <color name="FloralWhite">#FFFAF0</color>
     <color name="LemonChiffon">#FFFACD</color>
@@ -140,7 +140,7 @@
     <color name="DarkCyan">#008B8B</color>
     <color name="Teal">#008080</color>
     <color name="Green">#008000</color>
-    <color name="DarkGreen">#006400</color>
+    <color name="DarkGreen">#70ad47</color>
     <color name="Blue">#0000FF</color>
     <color name="MediumBlue">#0000CD</color>
     <color name="DarkBlue">#00008B</color>

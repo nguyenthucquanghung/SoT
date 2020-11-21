@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/Yellow"
+    android:layout_height="match_parent"
+    tools:context=".view.SearchFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        android:layout_margin="@dimen/dp_5">
+
+        <TextView
+            android:textColor="@color/Black"
+            android:layout_margin="@dimen/dp_15"
+            android:id="@+id/tv_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/tv_intro"
+            android:layout_marginHorizontal="@dimen/dp_15"
+            android:id="@+id/rv_ref"
+            android:layout_above="@+id/tv_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tv_intro"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:background="@drawable/bordered_green_rectangle"
+            android:textColor="@color/Black"
+            android:paddingVertical="@dimen/dp_10"
+            android:textSize="@dimen/dp_20"
+            android:gravity="center"
+            android:layout_marginVertical="@dimen/dp_10"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:id="@+id/tv_back"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_my_page"/>
+    </RelativeLayout>
+
+</FrameLayout>

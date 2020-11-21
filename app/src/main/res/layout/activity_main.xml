@@ -94,6 +94,7 @@
 
         <TextView
             android:id="@+id/tv_error"
+            android:text="@string/no_related_news_found"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
