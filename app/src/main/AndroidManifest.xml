@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_sot_app"
+        android:icon="@drawable/ic_sot_black"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_sot_app"
+        android:roundIcon="@drawable/ic_sot_black"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.PopUpActivity">

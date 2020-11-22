@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
             et_news.isCursorVisible = false
-            viewModel.getRefLinks(searchRequestBody, Const.BEARER_TOKEN)
+            viewModel.getDatabaseRefLinks(searchRequestBody, Const.BEARER_TOKEN)
             rv_ref.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = refLinkAdapter

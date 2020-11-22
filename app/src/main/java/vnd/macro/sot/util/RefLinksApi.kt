@@ -11,4 +11,6 @@ interface RefLinksApi {
 
     @POST("fake-news-checking?accept-language=en-US")
     fun getRefLinks(@Body searchRequestBody: SearchRequestBody, @Header("Authorization") bearerToken: String): Single<SearchResponse>
+    @POST("fake-news-checking")
+    fun getDatabaseRefLinks(@Body searchRequestBody: SearchRequestBody, @Header("Authorization") bearerToken: String): Single<SearchResponse>
 }

@@ -32,12 +32,38 @@ class ListViewModel: ViewModel() {
     fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
         fetchRefLinks(searchRequestBody, bearerToken)
     }
+    fun getDatabaseRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
+        fetchDatabaseRefLinks(searchRequestBody, bearerToken)
+    }
 
     private fun fetchRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
         loading.value = true
         disposable.add(
             refLinksService
                 .getRefLinks(searchRequestBody, bearerToken)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<SearchResponse>() {
+                    override fun onSuccess(t: SearchResponse) {
+                        refLinks.value = t.referenceLinks
+                        serverError.value = t.referenceLinks.isNullOrEmpty()
+                        loading.value = false
+                    }
+
+                    override fun onError(e: Throwable) {
+                        serverError.value = true
+                        loading.value = false
+                    }
+
+                })
+
+        )
+    }
+    private fun fetchDatabaseRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
+        loading.value = true
+        disposable.add(
+            refLinksService
+                .getDatabaseRefLinks(searchRequestBody, bearerToken)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<SearchResponse>() {
