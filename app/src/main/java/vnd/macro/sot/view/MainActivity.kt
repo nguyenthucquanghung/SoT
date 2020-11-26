@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val refLinkAdapter = RefLinkAdapter(arrayListOf(), this)
     private val langList = listOf("All languages", "English")
     private var currentLangPos = 0
+    private var currentLang: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +32,7 @@ class MainActivity : AppCompatActivity() {
         tv_error.visibility = View.GONE
         pb_loading.visibility = View.GONE
 
-        iv_search.setOnClickListener {
-            searchEventDetected()
-
-        }
+        iv_search.setOnClickListener { searchEventDetected() }
 
         et_news.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -50,10 +48,7 @@ class MainActivity : AppCompatActivity() {
             tv_language.text = langList[currentLangPos]
         }
 
-        et_news.setOnClickListener {
-            et_news.isCursorVisible = true
-        }
-
+        et_news.setOnClickListener { et_news.isCursorVisible = true }
 
     }
 
@@ -64,7 +59,15 @@ class MainActivity : AppCompatActivity() {
         } else {
             val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
             et_news.isCursorVisible = false
-            viewModel.getDatabaseRefLinks(searchRequestBody, Const.BEARER_TOKEN)
+
+            when (currentLangPos) {
+                0 -> currentLang = ""
+                1 -> currentLang = "en-US"
+            }
+
+            if (currentLang.isEmpty()) viewModel.getRefLinks(searchRequestBody, Const.DEFAULT_BEARER_TOKEN)
+            else viewModel.getRefLinks(searchRequestBody, Const.DEFAULT_BEARER_TOKEN, currentLang)
+
             rv_ref.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = refLinkAdapter

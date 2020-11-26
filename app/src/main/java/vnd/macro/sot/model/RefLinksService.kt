@@ -16,7 +16,10 @@ class RefLinksService {
     fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String): Single<SearchResponse> {
         return api.getRefLinks(searchRequestBody, bearerToken)
     }
-    fun getDatabaseRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String): Single<SearchResponse> {
-        return api.getDatabaseRefLinks(searchRequestBody, bearerToken)
+    fun getRefLinks(searchRequestBody: SelectRequestBody, bearerToken: String): Single<SearchResponse> {
+        return api.getRefLinks(searchRequestBody, bearerToken)
+    }
+    fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String, lang: String): Single<SearchResponse> {
+        return api.getRefLinks(searchRequestBody, bearerToken, lang)
     }
 }

@@ -13,4 +13,7 @@
     <string name="sot_select">SoT SELECT</string>
     <string name="back_to_my_page">BACK TO MY PAGE</string>
     <string name="no_related_news_found">No related news found!</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

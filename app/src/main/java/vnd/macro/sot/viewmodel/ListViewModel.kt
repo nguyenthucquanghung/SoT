@@ -4,15 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import vnd.macro.sot.model.RefLinksService
-import vnd.macro.sot.model.ReferenceLink
 import javax.inject.Inject
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import vnd.macro.sot.di.DaggerApiComponent
-import vnd.macro.sot.model.SearchResponse
-import vnd.macro.sot.model.SearchRequestBody
+import vnd.macro.sot.model.*
 
 class ListViewModel: ViewModel() {
 
@@ -32,8 +29,11 @@ class ListViewModel: ViewModel() {
     fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
         fetchRefLinks(searchRequestBody, bearerToken)
     }
-    fun getDatabaseRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
-        fetchDatabaseRefLinks(searchRequestBody, bearerToken)
+    fun getRefLinks(searchRequestBody: SelectRequestBody, bearerToken: String) {
+        fetchRefLinks(searchRequestBody, bearerToken)
+    }
+    fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String, lang:String) {
+        fetchRefLinks(searchRequestBody, bearerToken, lang)
     }
 
     private fun fetchRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
@@ -59,11 +59,34 @@ class ListViewModel: ViewModel() {
 
         )
     }
-    private fun fetchDatabaseRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
+    private fun fetchRefLinks(searchRequestBody: SelectRequestBody, bearerToken: String) {
         loading.value = true
         disposable.add(
             refLinksService
-                .getDatabaseRefLinks(searchRequestBody, bearerToken)
+                .getRefLinks(searchRequestBody, bearerToken)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<SearchResponse>() {
+                    override fun onSuccess(t: SearchResponse) {
+                        refLinks.value = t.referenceLinks
+                        serverError.value = t.referenceLinks.isNullOrEmpty()
+                        loading.value = false
+                    }
+
+                    override fun onError(e: Throwable) {
+                        serverError.value = true
+                        loading.value = false
+                    }
+
+                })
+
+        )
+    }
+    private fun fetchRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String, lang: String) {
+        loading.value = true
+        disposable.add(
+            refLinksService
+                .getRefLinks(searchRequestBody, bearerToken, lang)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<SearchResponse>() {

@@ -10,7 +10,6 @@ import androidx.core.text.bold
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search.view.pb_loading
 import kotlinx.android.synthetic.main.fragment_search.view.rv_ref
@@ -44,7 +43,7 @@ class SearchFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, selectedText)
-        viewModel.getRefLinks(searchRequestBody, Const.BEARER_TOKEN)
+        viewModel.getRefLinks(searchRequestBody, Const.DEFAULT_BEARER_TOKEN)
         view.rv_ref.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = refLinkAdapter
