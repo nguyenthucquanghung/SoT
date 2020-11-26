@@ -10,7 +10,7 @@ import vnd.macro.sot.util.RefLinksApi
 
 @Module
 class ApiModule {
-    private val BASE_URL = "https://api.serumoftruth.com/extension/"
+    private val BASE_URL = "https://api.serumoftruth.com/"
 
     @Provides
     fun provideRefLinkApi() : RefLinksApi {

@@ -8,7 +8,7 @@
     <!-- Some default colors-->
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
-    <color name="LightYellow">#FFFFE0</color>
+    <color name="LightYellow">#F0EB62</color>
     <color name="Yellow">#ffff00</color>
     <color name="Snow">#FFFAFA</color>
     <color name="FloralWhite">#FFFAF0</color>
@@ -108,6 +108,7 @@
     <color name="LawnGreen">#7CFC00</color>
     <color name="MediumSlateBlue">#7B68EE</color>
     <color name="LightSlateGray">#778899</color>
+    <color name="LightGray">#D5D5D5</color>
     <color name="SlateGray">#708090</color>
     <color name="OliveDrab">#6B8E23</color>
     <color name="SlateBlue">#6A5ACD</color>
@@ -128,7 +129,7 @@
     <color name="SeaGreen">#2E8B57</color>
     <color name="ForestGreen">#228B22</color>
     <color name="LightSeaGreen">#20B2AA</color>
-    <color name="DodgerBlue">#1E90FF</color>
+    <color name="DodgerBlue">#3B87C8</color>
     <color name="MidnightBlue">#191970</color>
     <color name="Aqua">#00FFFF</color>
     <color name="Cyan">#00FFFF</color>
@@ -146,5 +147,5 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
-    <color name="DarkGrey">#1C1C1C</color>
+    <color name="DarkGrey">#242424</color>
 </resources>

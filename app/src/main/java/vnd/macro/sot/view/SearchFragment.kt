@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_search.view.pb_loading
 import kotlinx.android.synthetic.main.fragment_search.view.rv_ref
 import vnd.macro.sot.R
 import vnd.macro.sot.model.SearchRequestBody
+import vnd.macro.sot.util.AppPreferences
 import vnd.macro.sot.util.Const
 import vnd.macro.sot.viewmodel.ListViewModel
 
@@ -43,7 +44,7 @@ class SearchFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, selectedText)
-        viewModel.getRefLinks(searchRequestBody, Const.DEFAULT_BEARER_TOKEN)
+        viewModel.getRefLinks(searchRequestBody, AppPreferences.accessToken)
         view.rv_ref.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = refLinkAdapter

@@ -7,6 +7,12 @@
     <string name="thumbnail">Thumbnail</string>
     <string name="title">Title</string>
     <string name="url">Url: </string>
+    <!--    Shared Preferences-->
+    <string name="sp_user_id">sp_user_id</string>
+    <string name="sp_user_email">sp_user_email</string>
+    <string name="sp_access_token">sp_access_token</string>
+    <string name="sp_expired_time">sp_expired_time</string>
+    <string name="sp_login_state">sp_login_state</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sot_search">SoT SEARCH</string>
@@ -16,4 +22,9 @@
     <string name="sign_in">SIGN IN</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="log_in">LOG IN</string>
+    <string name="not_a_member">Not a member?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="i_can_t_remember_my_password">I can\'t remember my password</string>
+    <string name="x">[x]</string>
 </resources>

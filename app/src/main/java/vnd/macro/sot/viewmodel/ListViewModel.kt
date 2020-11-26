@@ -29,8 +29,8 @@ class ListViewModel: ViewModel() {
     fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
         fetchRefLinks(searchRequestBody, bearerToken)
     }
-    fun getRefLinks(searchRequestBody: SelectRequestBody, bearerToken: String) {
-        fetchRefLinks(searchRequestBody, bearerToken)
+    fun getRefLinks(selectRequestBody: SelectRequestBody, bearerToken: String) {
+        fetchRefLinks(selectRequestBody, bearerToken)
     }
     fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String, lang:String) {
         fetchRefLinks(searchRequestBody, bearerToken, lang)

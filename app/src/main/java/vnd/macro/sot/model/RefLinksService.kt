@@ -22,4 +22,7 @@ class RefLinksService {
     fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String, lang: String): Single<SearchResponse> {
         return api.getRefLinks(searchRequestBody, bearerToken, lang)
     }
+    fun login(loginRequestBody: LoginRequestBody): Single<LoginResponse> {
+        return api.login(loginRequestBody)
+    }
 }

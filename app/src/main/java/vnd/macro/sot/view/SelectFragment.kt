@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import vnd.macro.sot.R
 import vnd.macro.sot.model.SelectRequestBody
+import vnd.macro.sot.util.AppPreferences
 import vnd.macro.sot.util.Const
 import vnd.macro.sot.viewmodel.ListViewModel
+import java.lang.Appendable
 
 private const val SELECTED_TEXT = "selectedText"
 
@@ -37,7 +39,7 @@ class SelectFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_select, container, false)
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         val selectRequestBody = SelectRequestBody(Const.LENGTH_PARAM, selectedText)
-        viewModel.getRefLinks(selectRequestBody, Const.DEFAULT_BEARER_TOKEN)
+        viewModel.getRefLinks(selectRequestBody, AppPreferences.accessToken)
         view.rv_ref.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = refLinkAdapter
