@@ -4,13 +4,16 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
-import vnd.macro.sot.model.SearchResponse
-import vnd.macro.sot.model.SearchRequestBody
+import retrofit2.http.Query
+import vnd.macro.sot.model.*
 
 interface RefLinksApi {
-
-    @POST("fake-news-checking?accept-language=en-US")
+    @POST("/extension/fake-news-checking")
     fun getRefLinks(@Body searchRequestBody: SearchRequestBody, @Header("Authorization") bearerToken: String): Single<SearchResponse>
-    @POST("fake-news-checking")
-    fun getDatabaseRefLinks(@Body searchRequestBody: SearchRequestBody, @Header("Authorization") bearerToken: String): Single<SearchResponse>
+    @POST("/extension/fake-news-checking")
+    fun getRefLinks(@Body searchRequestBody: SelectRequestBody, @Header("Authorization") bearerToken: String): Single<SearchResponse>
+    @POST("/extension/fake-news-checking")
+    fun getRefLinks(@Body searchRequestBody: SearchRequestBody, @Header("Authorization") bearerToken: String, @Query("accept-language") lang: String): Single<SearchResponse>
+    @POST("/customer/login")
+    fun login(@Body loginRequestBody: LoginRequestBody): Single<LoginResponse>
 }

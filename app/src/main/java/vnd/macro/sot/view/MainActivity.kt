@@ -1,16 +1,20 @@
 package vnd.macro.sot.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import vnd.macro.sot.R
 import vnd.macro.sot.model.SearchRequestBody
+import vnd.macro.sot.util.AppPreferences
 import vnd.macro.sot.util.Const
 import vnd.macro.sot.util.hideKeyboard
 import vnd.macro.sot.viewmodel.ListViewModel
@@ -20,10 +24,15 @@ class MainActivity : AppCompatActivity() {
     private val refLinkAdapter = RefLinkAdapter(arrayListOf(), this)
     private val langList = listOf("All languages", "English")
     private var currentLangPos = 0
+    private var currentLang: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (!AppPreferences.isLogin) {
+            openLoginActivity()
+        }
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
 
@@ -31,11 +40,21 @@ class MainActivity : AppCompatActivity() {
         tv_error.visibility = View.GONE
         pb_loading.visibility = View.GONE
 
-        iv_search.setOnClickListener {
-            searchEventDetected()
+        iv_search.setOnClickListener { searchEventDetected() }
 
+        tv_logout.setOnClickListener {
+            val b: AlertDialog.Builder = AlertDialog.Builder(this)
+            b.setTitle("Do you want to logout?")
+            b.setPositiveButton("Logout") { _, _ ->
+                AppPreferences.isLogin = false
+                openLoginActivity()
+            }
+            b.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.cancel()
+            }
+            val ad = b.create()
+            ad.show()
         }
-
         et_news.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 searchEventDetected()
@@ -50,11 +69,15 @@ class MainActivity : AppCompatActivity() {
             tv_language.text = langList[currentLangPos]
         }
 
-        et_news.setOnClickListener {
-            et_news.isCursorVisible = true
-        }
+        et_news.setOnClickListener { et_news.isCursorVisible = true }
 
+    }
 
+    private fun openLoginActivity() {
+        val intent =
+            Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 
     private fun searchEventDetected() {
@@ -64,7 +87,18 @@ class MainActivity : AppCompatActivity() {
         } else {
             val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
             et_news.isCursorVisible = false
-            viewModel.getDatabaseRefLinks(searchRequestBody, Const.BEARER_TOKEN)
+
+            when (currentLangPos) {
+                0 -> currentLang = ""
+                1 -> currentLang = "en-US"
+            }
+
+            if (currentLang.isEmpty()) viewModel.getRefLinks(
+                searchRequestBody,
+                AppPreferences.accessToken
+            )
+            else viewModel.getRefLinks(searchRequestBody, AppPreferences.accessToken, currentLang)
+
             rv_ref.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = refLinkAdapter

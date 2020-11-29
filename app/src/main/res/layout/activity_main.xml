@@ -7,11 +7,20 @@
     android:orientation="vertical"
     tools:context=".view.MainActivity">
 
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/x"
+        android:textColor="@drawable/selector_button_login"
+        android:layout_gravity="end"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_30"
-        android:layout_marginVertical="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
         android:adjustViewBounds="true"
         android:contentDescription="@string/slogan_image"
         android:src="@drawable/img_sot_slogan" />

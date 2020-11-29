@@ -1,7 +1,6 @@
 package vnd.macro.sot.view
 
 import android.os.Bundle
-import android.text.Html
 import android.text.SpannableStringBuilder
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +12,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import vnd.macro.sot.R
-import vnd.macro.sot.model.SearchRequestBody
+import vnd.macro.sot.model.SelectRequestBody
+import vnd.macro.sot.util.AppPreferences
 import vnd.macro.sot.util.Const
 import vnd.macro.sot.viewmodel.ListViewModel
+import java.lang.Appendable
 
 private const val SELECTED_TEXT = "selectedText"
 
@@ -37,15 +38,15 @@ class SelectFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_select, container, false)
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-        val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, selectedText)
-        viewModel.getRefLinks(searchRequestBody, Const.BEARER_TOKEN)
+        val selectRequestBody = SelectRequestBody(Const.LENGTH_PARAM, selectedText)
+        viewModel.getRefLinks(selectRequestBody, AppPreferences.accessToken)
         view.rv_ref.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = refLinkAdapter
             observeViewModel(view)
         }
 
-        val head = "Results from the most Trusted and Unblased news outlets for: \""
+        val head = "Results from the most Trusted and Unbiased news outlets for: \""
         intro = SpannableStringBuilder()
             .append(head)
             .bold { append(selectedText) }
