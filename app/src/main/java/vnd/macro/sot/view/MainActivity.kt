@@ -1,9 +1,11 @@
 package vnd.macro.sot.view
 
-import android.content.DialogInterface
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -22,10 +24,11 @@ import vnd.macro.sot.viewmodel.ListViewModel
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: ListViewModel
     private val refLinkAdapter = RefLinkAdapter(arrayListOf(), this)
-    private val langList = listOf("All languages", "English")
+    private val langList = listOf("English", "All languages")
     private var currentLangPos = 0
     private var currentLang: String = ""
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         tv_error.visibility = View.GONE
         pb_loading.visibility = View.GONE
 
-        iv_search.setOnClickListener { searchEventDetected() }
 
         tv_logout.setOnClickListener {
             val b: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -63,10 +65,19 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+        et_news.setOnTouchListener { _, event ->
+            et_news.setSelection(0)
+            val drawableEndPos = 2;
+            val searchClicked = event.action == MotionEvent.ACTION_UP
+                    && event.rawX >= (et_news.right - et_news.compoundDrawables[drawableEndPos].bounds.width())
+            if (searchClicked) searchEventDetected()
+            searchClicked
+        }
         tv_language.setOnClickListener {
             if (currentLangPos < langList.size - 1) currentLangPos++
             else currentLangPos = 0
             tv_language.text = langList[currentLangPos]
+            Toast.makeText(this, "Searching language changed!", Toast.LENGTH_SHORT).show()
         }
 
         et_news.setOnClickListener { et_news.isCursorVisible = true }
@@ -89,15 +100,21 @@ class MainActivity : AppCompatActivity() {
             et_news.isCursorVisible = false
 
             when (currentLangPos) {
-                0 -> currentLang = ""
-                1 -> currentLang = "en-US"
+                0 -> currentLang = "en-US"
+                1 -> currentLang = ""
             }
 
-            if (currentLang.isEmpty()) viewModel.getRefLinks(
-                searchRequestBody,
-                AppPreferences.accessToken
-            )
-            else viewModel.getRefLinks(searchRequestBody, AppPreferences.accessToken, currentLang)
+            if (currentLang.isEmpty()) {
+                Log.d("HEHEHE", "all")
+                viewModel.getRefLinks(
+                    searchRequestBody,
+                    AppPreferences.accessToken
+                )
+            }
+            else {
+                Log.d("HEHEHE", "en")
+                viewModel.getRefLinks(searchRequestBody, AppPreferences.accessToken, currentLang)
+            }
 
             rv_ref.apply {
                 layoutManager = LinearLayoutManager(context)

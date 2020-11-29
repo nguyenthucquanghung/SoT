@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Serum of Truth</string>
     <string name="slogan_image">Slogan Image</string>
-    <string name="serum_of_truth_database">Serum of Truth Database</string>
+    <string name="serum_of_truth_database">SERUM OF TRUTH DATABASE</string>
     <string name="icon_sot_search">Icon SoT search</string>
     <string name="all_languages">All languages</string>
     <string name="thumbnail">Thumbnail</string>
@@ -26,5 +26,6 @@
     <string name="not_a_member">Not a member?</string>
     <string name="sign_up">Sign up</string>
     <string name="i_can_t_remember_my_password">I can\'t remember my password</string>
-    <string name="x">[x]</string>
+    <string name="x">[ X ]</string>
+    <string name="english">English</string>
 </resources>
