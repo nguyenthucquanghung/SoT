@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Selection
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +61,14 @@ class LoginActivity : AppCompatActivity() {
             false
         }
 
+        et_email.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                et_email.clearFocus()
+                et_password.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
+        }
         tv_login.setOnClickListener {
             login()
         }

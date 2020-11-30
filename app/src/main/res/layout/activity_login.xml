@@ -33,6 +33,7 @@
         android:layout_below="@id/tv_email"
         android:layout_marginHorizontal="@dimen/dp_30"
         android:layout_marginVertical="@dimen/dp_5"
+        android:inputType="textEmailAddress"
         android:background="@drawable/grey_borderd_rectangle"
         android:hint="@string/email"
         android:paddingHorizontal="@dimen/dp_10" />
