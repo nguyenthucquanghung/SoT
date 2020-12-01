@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             val drawableEndPos = 2;
             val searchClicked = event.action == MotionEvent.ACTION_UP
                     && event.rawX >= (et_news.right - et_news.compoundDrawables[drawableEndPos].bounds.width())
-            if (searchClicked) searchEventDetected()
+            if (searchClicked) { searchEventDetected() }
             searchClicked
         }
         tv_language.setOnClickListener {
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Searching language changed!", Toast.LENGTH_SHORT).show()
         }
 
-        et_news.setOnClickListener { et_news.isCursorVisible = true }
+        et_news.setOnClickListener { et_news.requestFocus() }
 
     }
 
@@ -97,7 +97,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Please enter some incredulous news!", Toast.LENGTH_SHORT).show()
         } else {
             val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
-            et_news.isCursorVisible = false
+
+            et_news.clearFocus()
 
             when (currentLangPos) {
                 0 -> currentLang = "en-US"
@@ -110,8 +111,7 @@ class MainActivity : AppCompatActivity() {
                     searchRequestBody,
                     AppPreferences.accessToken
                 )
-            }
-            else {
+            } else {
                 Log.d("HEHEHE", "en")
                 viewModel.getRefLinks(searchRequestBody, AppPreferences.accessToken, currentLang)
             }
@@ -124,6 +124,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun observeViewModel() {
         viewModel.refLinks.observe(this, Observer { singleRefLinks ->
             singleRefLinks?.let {

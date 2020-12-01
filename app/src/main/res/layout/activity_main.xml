@@ -8,15 +8,12 @@
 
     <ImageView
         android:id="@+id/iv_slogan"
-        android:layout_marginTop="@dimen/dp_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_20"
         android:adjustViewBounds="true"
         android:paddingHorizontal="@dimen/dp_5"
         android:contentDescription="@string/slogan_image"
-        android:src="@drawable/img_sot_slogan" />
+        android:src="@drawable/slogan" />
 
     <TextView
         android:id="@+id/tv_logout"
