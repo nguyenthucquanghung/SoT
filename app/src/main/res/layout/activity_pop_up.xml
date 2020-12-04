@@ -11,11 +11,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_30"
-        android:layout_marginVertical="@dimen/dp_20"
         android:adjustViewBounds="true"
         android:contentDescription="@string/slogan_image"
-        android:src="@drawable/img_sot_slogan" />
+        android:src="@drawable/slogan" />
 
     <LinearLayout
         android:layout_width="match_parent"

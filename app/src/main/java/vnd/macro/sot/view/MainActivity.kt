@@ -96,8 +96,8 @@ class MainActivity : AppCompatActivity() {
         if (et_news.text.toString().isEmpty()) {
             Toast.makeText(this, "Please enter some incredulous news!", Toast.LENGTH_SHORT).show()
         } else {
-            val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
-
+//            val searchRequestBody = SearchRequestBody(Const.LENGTH_PARAM, et_news.text.toString())
+            val searchKeyword = et_news.text.toString()
             et_news.clearFocus()
 
             when (currentLangPos) {
@@ -106,14 +106,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (currentLang.isEmpty()) {
-                Log.d("HEHEHE", "all")
-                viewModel.getRefLinks(
-                    searchRequestBody,
-                    AppPreferences.accessToken
+                viewModel.getDbSearchRes(
+                    AppPreferences.accessToken,
+                    searchKeyword
                 )
             } else {
-                Log.d("HEHEHE", "en")
-                viewModel.getRefLinks(searchRequestBody, AppPreferences.accessToken, currentLang)
+                viewModel.getDbSearchRes(AppPreferences.accessToken, searchKeyword, currentLang)
             }
 
             rv_ref.apply {

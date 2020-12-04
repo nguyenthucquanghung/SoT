@@ -1,5 +1,6 @@
 package vnd.macro.sot.model
 
+import androidx.annotation.Nullable
 import com.google.gson.annotations.SerializedName
 
 data class ReferenceLink(
@@ -8,7 +9,7 @@ data class ReferenceLink(
     @SerializedName("url")
     val url: String,
     @SerializedName("thumbnail")
-    val thumbnail: String,
+    val thumbnail: String?,
     @SerializedName("desc")
     val desc: String
 )

@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
+import retrofit2.Response
 import vnd.macro.sot.di.DaggerApiComponent
 import vnd.macro.sot.model.*
 
@@ -32,10 +32,81 @@ class ListViewModel: ViewModel() {
     fun getRefLinks(selectRequestBody: SelectRequestBody, bearerToken: String) {
         fetchRefLinks(selectRequestBody, bearerToken)
     }
-    fun getRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String, lang:String) {
-        fetchRefLinks(searchRequestBody, bearerToken, lang)
+
+    fun getDbSearchRes(bearerToken: String, keyword: String, lang:String) {
+        fetchDbSearchRes(bearerToken, keyword, lang)
+    }
+    fun getDbSearchRes(bearerToken: String, keyword: String) {
+        fetchDbSearchRes(bearerToken, keyword)
     }
 
+
+    private fun fetchDbSearchRes(bearerToken: String, keyword: String, lang: String) {
+        loading.value = true
+        disposable.add(
+            refLinksService
+                .databaseSearch(bearerToken, keyword, lang)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<DatabaseSearchRefLink>>() {
+                    override fun onSuccess(t: List<DatabaseSearchRefLink>) {
+                        val dbRefLinks: MutableList<ReferenceLink> = mutableListOf()
+                        for (dsrl in t)
+                            dbRefLinks.add(
+                                ReferenceLink(
+                                    dsrl.reviews.get(0).title,
+                                    dsrl.reviews.get(0).url,
+                                    dsrl.imageUri,
+                                    dsrl.text
+                                )
+                            )
+                        refLinks.value = dbRefLinks
+                        serverError.value = dbRefLinks.isNullOrEmpty()
+                        loading.value = false
+                    }
+
+                    override fun onError(e: Throwable) {
+                        serverError.value = true
+                        loading.value = false
+                    }
+
+                })
+
+        )
+    }
+    private fun fetchDbSearchRes(bearerToken: String, keyword: String) {
+        loading.value = true
+        disposable.add(
+            refLinksService
+                .databaseSearch(bearerToken, keyword)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<DatabaseSearchRefLink>>() {
+                    override fun onSuccess(t: List<DatabaseSearchRefLink>) {
+                        val dbRefLinks: MutableList<ReferenceLink> = mutableListOf()
+                        for (dsrl in t)
+                            dbRefLinks.add(
+                                ReferenceLink(
+                                    dsrl.reviews.get(0).title,
+                                    dsrl.reviews.get(0).url,
+                                    dsrl.imageUri,
+                                    dsrl.text
+                                )
+                            )
+                        refLinks.value = dbRefLinks
+                        serverError.value = dbRefLinks.isNullOrEmpty()
+                        loading.value = false
+                    }
+
+                    override fun onError(e: Throwable) {
+                        serverError.value = true
+                        loading.value = false
+                    }
+
+                })
+
+        )
+    }
     private fun fetchRefLinks(searchRequestBody: SearchRequestBody, bearerToken: String) {
         loading.value = true
         disposable.add(

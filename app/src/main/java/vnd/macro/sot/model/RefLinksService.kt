@@ -1,6 +1,7 @@
 package vnd.macro.sot.model
 
 import io.reactivex.Single
+import retrofit2.Response
 import vnd.macro.sot.di.DaggerApiComponent
 import vnd.macro.sot.util.RefLinksApi
 import javax.inject.Inject
@@ -24,5 +25,11 @@ class RefLinksService {
     }
     fun login(loginRequestBody: LoginRequestBody): Single<LoginResponse> {
         return api.login(loginRequestBody)
+    }
+    fun databaseSearch(bearerToken: String, keyword: String, lang: String): Single<List<DatabaseSearchRefLink>> {
+        return api.databaseSearch(bearerToken, keyword, lang)
+    }
+    fun databaseSearch(bearerToken: String, keyword: String): Single<List<DatabaseSearchRefLink>> {
+        return api.databaseSearch(bearerToken, keyword)
     }
 }
